@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>For Nhi 💖</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;700&display=swap" rel="stylesheet">
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Dancing Script', cursive;
+        background: #ffd6e7;
+        overflow: hidden;
+        text-align: center;
+        color: #c2185b;
+    }
+
+    .center {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 90%;
+    }
+
+    /* Smooth fade text */
+    .text {
+        font-size: 2.2rem;
+        opacity: 0;
+        transition: opacity 1.2s ease-in-out;
+    }
+
+    .text.show {
+        opacity: 1;
+    }
+
+    button {
+        font-family: 'Dancing Script', cursive;
+        font-size: 1.8rem;
+        padding: 12px 30px;
+        border-radius: 40px;
+        border: none;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        margin: 10px;
+    }
+
+    .yes {
+        background: #ff5c8a;
+        color: white;
+    }
+
+    .no {
+        background: #ccc;
+        color: #555;
+    }
+
+    .typing {
+        font-size: 2rem;
+        white-space: pre-line;
+        line-height: 1.5;
+    }
+
+    /* Floating hearts */
+    .heart {
+        position: fixed;
+        animation: float 6s linear infinite;
+        pointer-events: none;
+        border-radius: 10px;
+        object-fit: cover;
+    }
+
+    @keyframes float {
+        0% {
+            transform: translateY(100vh);
+            opacity: 1;
+        }
+        100% {
+            transform: translateY(-10vh);
+            opacity: 0;
+        }
+    }
+
+    .card {
+        background: white;
+        margin: 15px auto;
+        padding: 15px;
+        border-radius: 20px;
+        width: 80%;
+        font-size: 1.5rem;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+
+    .final {
+        font-size: 2.5rem;
+        color: #d81b60;
+    }
+
+    /* ===================== */
+    /* 📱 MOBILE OPTIMIZATION */
+    /* ===================== */
+    @media (max-width: 600px) {
+        .text {
+            font-size: 1.6rem;
+        }
+
+        .typing {
+            font-size: 1.5rem;
+            line-height: 1.4;
+        }
+
+        button {
+            font-size: 1.4rem;
+            padding: 10px 22px;
+        }
+
+        .card {
+            font-size: 1.3rem;
+            width: 90%;
+        }
+
+        .final {
+            font-size: 2rem;
+        }
+    }
+</style>
+</head>
+
+<body>
+
+<div id="screen" class="center">
+    <div id="introText" class="text"></div>
+</div>
+
+<script>
+const screen = document.getElementById("screen");
+const introDiv = document.getElementById("introText");
+
+/* Floating hearts */
+const heartImages = [
+    "img/06aeb09f-7f4b-4a38-ac49-64311e7d540d.jpg",
+    "img/2aa176a65dd3d38d8ac27.jpg",
+    "img/2afd72ec5999d7c78e881.jpg",
+    "img/2c64ad68861d0843510c5.jpg",
+    "img/32431db737c2b99ce0d319.jpg",
+    "img/3d1aa2ad-0a1e-4954-a209-6d05610ebac1.jpg",
+    "img/48c4f2ffd98a57d40e9b8.jpg",
+    "img/52630c9b26eea8b0f1ff17.jpg",
+    "img/5a21830fa87a26247f6b11.jpg",
+    "img/7f0fdfeff59a7bc4228b20.jpg",
+    "img/872679f9-a56f-4f5b-88e1-e7dbc687f8cd.jpg",
+    "img/88395fdf75aafbf4a2bb21.jpg",
+    "img/976da04e8b3b05655c2a12.jpg",
+    "img/98e2ac108665083b517418.jpg",
+    "img/9e1f58d7-61e6-422a-beb6-89085f526039.jpg",
+    "img/b484aa60-c244-4c2e-87ea-8d9cb8c55c66.jpg",
+    "img/bcce1ee9359cbbc2e28d13.jpg",
+    "img/d2903eb815cd9b93c2dc10.jpg",
+    "img/da28d823f3567d0824474.jpg",
+    "img/e5373eed14989ac6c38914.jpg",
+    "img/e9229335b840361e6f512.jpg",
+    "img/ed1f32141961973fce703.jpg",
+    "img/f998dd58f72d7973203c16.jpg"
+];
+
+setInterval(() => {
+    const heart = document.createElement("img");
+    heart.className = "heart";
+    heart.src = heartImages[Math.floor(Math.random() * heartImages.length)];
+    const size = Math.random() * 40 + 50;
+    heart.style.width = size + "px";
+    heart.style.height = size + "px";
+    heart.style.left = Math.random() * 100 + "vw";
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 6000);
+}, 450);
+
+/* Intro texts */
+const introTexts = [
+    "Cảm ơn vì em đã đến với cuộc đời anh",
+    "Anh rất yêu em đó Nhi ơi",
+    "Em là cô gái tuyệt vời nhất đời anh"
+];
+
+let introIndex = 0;
+
+function showIntroSmooth() {
+    if (introIndex >= introTexts.length) {
+        setTimeout(showQuestion, 600);
+        return;
+    }
+
+    introDiv.classList.remove("show");
+
+    setTimeout(() => {
+        introDiv.textContent = introTexts[introIndex];
+        introIndex++;
+        introDiv.classList.add("show");
+    }, 1200);
+
+    setTimeout(showIntroSmooth, 3600);
+}
+
+/* Question */
+function showQuestion() {
+    screen.innerHTML = `
+        <div class="typing">Em có yêu anh không?</div>
+        <div>
+            <button class="yes" id="yesBtn">Có 💖</button>
+            <button class="no" id="noBtn">Không 💔</button>
+        </div>
+    `;
+
+    const yesBtn = document.getElementById("yesBtn");
+    const noBtn = document.getElementById("noBtn");
+
+    let yesSize = 1.8;
+    let noSize = 1.8;
+
+    noBtn.onclick = () => {
+        noSize -= 0.2;
+        yesSize += 0.2;
+        noBtn.style.fontSize = noSize + "rem";
+        yesBtn.style.fontSize = yesSize + "rem";
+    };
+
+    yesBtn.onclick = showConfession;
+}
+
+/* Confession typing */
+function showConfession() {
+    const text =
+`Anh không hứa sẽ cho em cả thế giới...
+Nhưng anh hứa sẽ cho em cả thế giới của anh 💖`;
+
+    screen.innerHTML = `<div class="typing" id="typing"></div>`;
+    const typingDiv = document.getElementById("typing");
+    let i = 0;
+
+    const interval = setInterval(() => {
+        typingDiv.innerHTML += text.charAt(i);
+        i++;
+        if (i >= text.length) {
+            clearInterval(interval);
+            setTimeout(showReasons, 1200);
+        }
+    }, 60);
+}
+
+/* Reasons */
+function showReasons() {
+    screen.innerHTML = `
+        <div class="typing">Những điều anh yêu ở em 💗</div>
+        <div class="card">🌸 Nụ cười của em</div>
+        <div class="card">🌸 Cách em quan tâm anh</div>
+        <div class="card">🌸 Những lúc em giận nhưng vẫn đáng yêu</div>
+        <div class="card">🌸 Chỉ cần là em thôi</div>
+        <button class="yes" onclick="showLetter()">Tiếp tục 💌</button>
+    `;
+}
+
+/* Letter */
+function showLetter() {
+    screen.innerHTML = `
+        <div class="typing">
+        Nhi à,<br><br>
+        Cảm ơn em vì đã yêu anh,<br>
+        cảm ơn em vì đã ở đây.<br><br>
+        Valentine này và những Valentine sau,<br>
+        anh vẫn muốn là người nắm tay em 💕
+        </div><br>
+        <button class="yes" onclick="showFinal()">Có, và mãi mãi 💞</button>
+    `;
+}
+
+/* Final */
+function showFinal() {
+    screen.innerHTML = `
+        <div class="final">
+        Happy Valentine 14/2 💖<br>
+        Anh yêu em, Nhi
+        </div>
+    `;
+}
+
+showIntroSmooth();
+</script>
+
+</body>
+</html>
