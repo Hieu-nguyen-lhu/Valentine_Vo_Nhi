@@ -38,6 +38,23 @@
         opacity: 1;
     }
 
+    /* Fade in animation */
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .fade-in {
+        animation: fadeIn 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+        will-change: opacity, transform;
+    }
+
     button {
         font-family: 'Dancing Script', cursive;
         font-size: 1.8rem;
@@ -380,33 +397,33 @@ Nhưng anh hứa sẽ cho em cả thế giới của anh 💖`;
 /* Reasons */
 function showReasons() {
     screen.innerHTML = `
-        <div class="typing">Những điều anh yêu ở em 💗</div>
-        <div class="card">🌸 Nụ cười của em</div>
-        <div class="card">🌸 Cách em quan tâm anh</div>
-        <div class="card">🌸 Những lúc em giận nhưng vẫn đáng yêu</div>
-        <div class="card">🌸 Chỉ cần là em thôi</div>
-        <button class="yes" onclick="showLetter()">Tiếp tục 💌</button>
+        <div class="typing fade-in" style="animation-delay: 0s;">Những điều anh yêu ở em 💗</div>
+        <div class="card fade-in" style="animation-delay: 0.15s;">🌸 Nụ cười của em</div>
+        <div class="card fade-in" style="animation-delay: 0.3s;">🌸 Cách em quan tâm anh</div>
+        <div class="card fade-in" style="animation-delay: 0.45s;">🌸 Những lúc em giận nhưng vẫn đáng yêu</div>
+        <div class="card fade-in" style="animation-delay: 0.6s;">🌸 Chỉ cần là em thôi</div>
+        <button class="yes fade-in" onclick="showLetter()" style="animation-delay: 0.75s;">Tiếp tục 💌</button>
     `;
 }
 
 /* Letter */
 function showLetter() {
     screen.innerHTML = `
-        <div class="typing">
+        <div class="typing fade-in" style="animation-delay: 0s;">
         Nhi à,<br><br>
         Cảm ơn em vì đã yêu anh,<br>
         cảm ơn em vì đã ở đây.<br><br>
         Valentine này và những Valentine sau,<br>
         anh vẫn muốn là người nắm tay em 💕
         </div><br>
-        <button class="yes" onclick="showFinal()">Có, và mãi mãi 💞</button>
+        <button class="yes fade-in" onclick="showFinal()" style="animation-delay: 0.4s;">Có, và mãi mãi 💞</button>
     `;
 }
 
 /* Final */
 function showFinal() {
     screen.innerHTML = `
-        <div class="final">
+        <div class="final fade-in" style="animation-delay: 0s;">
         Happy Valentine 14/2 💖<br>
         Anh yêu em, Nhi
         </div>
