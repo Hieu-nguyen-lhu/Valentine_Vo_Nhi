@@ -100,10 +100,98 @@
         color: #d81b60;
     }
 
+    /* Sound Toggle Button */
+    .sound-toggle {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        width: 50px;
+        height: 50px;
+        background: #ff5c8a;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        font-size: 1.8rem;
+        z-index: 1000;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(255, 92, 138, 0.4);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .sound-toggle:hover {
+        transform: scale(1.1);
+        box-shadow: 0 6px 20px rgba(255, 92, 138, 0.6);
+    }
+
+    .sound-toggle:active {
+        transform: scale(0.95);
+    }
+
+    /* Start Screen Overlay */
+    #startOverlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, #ffc0cb, #ffd6e7);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 2000;
+        flex-direction: column;
+    }
+
+    .start-button {
+        font-family: 'Dancing Script', cursive;
+        font-size: 2rem;
+        padding: 20px 50px;
+        background: #ff5c8a;
+        color: white;
+        border: none;
+        border-radius: 40px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+
+    .start-button:hover {
+        transform: scale(1.05);
+        box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+    }
+
+    .start-button:active {
+        transform: scale(0.95);
+    }
+
+    .start-text {
+        font-size: 2rem;
+        color: #c2185b;
+        margin-bottom: 30px;
+        font-weight: bold;
+    }
+
     /* ===================== */
     /* 📱 MOBILE OPTIMIZATION */
     /* ===================== */
     @media (max-width: 600px) {
+        .start-text {
+            font-size: 1.5rem;
+        }
+
+        .start-button {
+            font-size: 1.5rem;
+            padding: 15px 40px;
+        }
+        .sound-toggle {
+            width: 45px;
+            height: 45px;
+            font-size: 1.5rem;
+            top: 15px;
+            right: 15px;
+        }
         .text {
             font-size: 1.6rem;
         }
@@ -132,6 +220,20 @@
 
 <body>
 
+<!-- Audio Player -->
+<audio id="bgMusic" loop>
+    <source src="sound/SƠN_TÙNG_M-TP_ĐỪNG_LÀM_TRÁI_TIM_ANH_ĐAU_OFFICIAL_MUSIC_VIDEO_KituChat (mp3cut.net).mp3" type="audio/mpeg">
+</audio>
+
+<!-- Start Overlay -->
+<div id="startOverlay">
+    <div class="start-text">Nhấn để bắt đầu 💕</div>
+    <button class="start-button" id="startBtn">Bắt đầu</button>
+</div>
+
+<!-- Sound Toggle Button -->
+<button class="sound-toggle" id="soundToggle" title="Bật/Tắt âm thanh">🔊</button>
+
 <div id="screen" class="center">
     <div id="introText" class="text"></div>
 </div>
@@ -139,6 +241,30 @@
 <script>
 const screen = document.getElementById("screen");
 const introDiv = document.getElementById("introText");
+const bgMusic = document.getElementById("bgMusic");
+const soundToggle = document.getElementById("soundToggle");
+const startOverlay = document.getElementById("startOverlay");
+const startBtn = document.getElementById("startBtn");
+
+// Start button - play music and hide overlay
+startBtn.addEventListener("click", () => {
+    startOverlay.style.display = "none";
+    bgMusic.play();
+});
+
+// Sound toggle functionality
+let isMuted = false;
+
+soundToggle.addEventListener("click", () => {
+    isMuted = !isMuted;
+    if (isMuted) {
+        bgMusic.pause();
+        soundToggle.textContent = "🔇";
+    } else {
+        bgMusic.play();
+        soundToggle.textContent = "🔊";
+    }
+});
 
 /* Floating hearts */
 const heartImages = [
